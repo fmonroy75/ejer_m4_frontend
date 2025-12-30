@@ -21,6 +21,7 @@
 </head>
 <body>
     <div class="container">
+        <header class="header text-center">
         <h1>Ejercicio 1: Solicitar nombre del usuario</h1>
         
         <p>Esta página pedirá tu nombre cuando se cargue y luego lo mostrará en pantalla.</p>
@@ -30,11 +31,13 @@
 let nombre = prompt("Por favor, introduce tu nombre:");
 si el usuario cancela o no ingresa nada, se asume valor <strong>"Anonimo"</strong>
 document.writeln("&lt;h2&gt;¡Hola " + nombre + "!&lt;/h2&gt;");
-  </div>
-        
-        <p><strong>Nota:</strong> El prompt aparecerá inmediatamente al cargar la página.</p>
-        <p>Después de introducir tu nombre, se mostrará en esta página usando document.writeln().</p>
-    </div>
+</div>
+
+<p><strong>Nota:</strong> El prompt aparecerá inmediatamente al cargar la página.</p>
+<p>Después de introducir tu nombre, se mostrará en esta página usando document.writeln().</p>
+</div>
+</header>
+ </div>
             <div class="container" >
             <h2>¡Hola <script>document.writeln(nombre);</script> !</h2>
             <p>Bienvenido/a al módulo 4 del curso de Front End.</p>
@@ -42,7 +45,22 @@ document.writeln("&lt;h2&gt;¡Hola " + nombre + "!&lt;/h2&gt;");
             <hr>
             <p><em>Este contenido fue generado usando document.writeln() después de obtener tu nombre mediante prompt().</em></p>
             </div>
-        
-    </script>
+
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <button class="btn btn-outline-primary" id="promptBtn">
+                        <a href="index.html">  <i class="bi bi-chat-dots"></i> Volver a inicio</a>
+                    </button>
+                </div>
+                
+            </div>
+                <!-- Footer -->
+                <footer class="footer">
+                    <p class="mb-2">Curso de Front End - Módulo 4 - Talento Digital</p>
+                    <p class="mb-0">
+                        <small>Desarrollado por Francisco Monroy</small>
+                    </p>
+                </footer>
 </body>
 </html>
