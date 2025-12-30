@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Módulo 4 - Front End</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
+    <script>
+        // Solicitar el nombre al usuario
+        let nombre = prompt("Por favor, introduce tu nombre:");
+        // Verificar que el usuario no canceló el prompt
+        if (nombre == null || nombre.trim() == "") {
+
+            nombre = "Anonimo";
+        }
+     </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Ejercicio 1: Solicitar nombre del usuario</h1>
+        
+        <p>Esta página pedirá tu nombre cuando se cargue y luego lo mostrará en pantalla.</p>
+        
+        <div class="code-block">
+// Código JavaScript utilizado:
+let nombre = prompt("Por favor, introduce tu nombre:");
+si el usuario cancela o no ingresa nada, se asume valor <strong>"Anonimo"</strong>
+document.writeln("&lt;h2&gt;¡Hola " + nombre + "!&lt;/h2&gt;");
+  </div>
+        
+        <p><strong>Nota:</strong> El prompt aparecerá inmediatamente al cargar la página.</p>
+        <p>Después de introducir tu nombre, se mostrará en esta página usando document.writeln().</p>
+    </div>
+            <div class="container" >
+            <h2>¡Hola <script>document.writeln(nombre);</script> !</h2>
+            <p>Bienvenido/a al módulo 4 del curso de Front End.</p>
+            <p>Has introducido: <strong><script>document.writeln(nombre);</script></strong></p>
+            <hr>
+            <p><em>Este contenido fue generado usando document.writeln() después de obtener tu nombre mediante prompt().</em></p>
+            </div>
+        
+    </script>
+</body>
+</html>
