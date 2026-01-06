@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Sistema de Calificaciones</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class="header text-center">
+            <h1><i class="bi bi-clipboard-data"></i> Sistema de Calificaciones</h1>
+            <p class="lead mt-2">Ejercicio: Evaluación de promedio de notas con diferentes mensajes según el resultado</p>
+
+        </header>
+
+        <div class="instructions">
+            <h3><i class="bi bi-info-circle"></i> Instrucciones del ejercicio:</h3>
+            <p>Este programa solicita 3 notas al usuario, calcula el promedio y muestra un mensaje diferente según el resultado:</p>
+            <ul class="instructions-list">
+                <li><strong>≥ 6.0:</strong> ¡Excelente! Tienes promedio (valor).</li>
+                <li><strong>≥ 5.0 y < 6.0:</strong> Tienes promedio (valor). ¡Sigue adelante, puedes mejorar!</li>
+                <li><strong>≥ 4.0 y < 5.0:</strong> Tienes promedio (valor). Debes esforzarte más.</li>
+                <li><strong>< 4.0:</strong> Has reprobado con promedio (valor). Continúa intentándolo.</li>
+            </ul>
+            <p class="mb-0"><strong>Nota:</strong> Las notas deben ingresarse separadas por comas o una a una.</p>
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-header d-flex align-items-center">
+                <i class="bi bi-journal-text exercise-icon"></i>
+                <div>
+                    <h3 class="h5 mb-0">Calculadora de Promedio de Notas</h3>
+                    <small>Ingresa 3 notas para calcular tu promedio y obtener retroalimentación</small>
+                </div>
+                <span class="badge bg-success ms-auto">Activo</span>
+            </div>
+            <div class="exercise-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5><i class="bi bi-input-cursor"></i> Métodos de entrada:</h5>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-custom" id="btnSweetAlert">
+                                <i class="bi bi-chat-square-text"></i> Ingresar valores
+                            </button>
+<!--                            <button class="btn btn-outline-primary" id="btnPrompt">
+                                <i class="bi bi-chat"></i> Ingresar con Prompt tradicional
+                            </button>
+                            <button class="btn btn-outline-secondary" id="btnExample">
+                                <i class="bi bi-magic"></i> Usar datos de ejemplo
+                            </button>-->
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h5><i class="bi bi-lightbulb"></i> Consejos:</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item">Las notas deben estar entre 1.0 y 7.0</li>
+                                <li class="list-group-item">Usa punto decimal (ej: 5.5)</li>
+                                <li class="list-group-item">Puedes ingresar varias notas separadas por comas</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="result-area">
+                            <h5><i class="bi bi-graph-up"></i> Resultados:</h5>
+                            <div id="resultContainer">
+                                <p class="text-muted text-center py-4">
+                                    <i class="bi bi-arrow-left-circle display-6 d-block mb-3"></i>
+                                    Ingresa tus notas para ver los resultados aquí
+                                </p>
+                            </div>
+                            
+                            <div id="alertContainer" class="mt-3"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h5><i class="bi bi-calculator"></i> Notas ingresadas:</h5>
+                    <div class="row" id="gradesDisplay">
+                        <div class="col-md-4 text-center">
+                            <div class="grade-card">
+                                <div class="grade-icon text-secondary">
+                                    <i class="bi bi-1-circle"></i>
+                                </div>
+                                <div class="grade-value text-secondary">--</div>
+                                <div class="text-muted">Nota 1</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="grade-card">
+                                <div class="grade-icon text-secondary">
+                                    <i class="bi bi-2-circle"></i>
+                                </div>
+                                <div class="grade-value text-secondary">--</div>
+                                <div class="text-muted">Nota 2</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="grade-card">
+                                <div class="grade-icon text-secondary">
+                                    <i class="bi bi-3-circle"></i>
+                                </div>
+                                <div class="grade-value text-secondary">--</div>
+                                <div class="text-muted">Nota 3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="mb-2">Curso de Front End - Módulo 4: Sistema de evaluación de notas</p>
+            <p class="mb-0">
+                <small>Ejercicio práctico - Condicionales y entrada de datos</small>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const btnSweetAlert = document.getElementById('btnSweetAlert');
+            //const btnPrompt = document.getElementById('btnPrompt');
+            //const btnExample = document.getElementById('btnExample');
+            const resultContainer = document.getElementById('resultContainer');
+            const alertContainer = document.getElementById('alertContainer');
+            const gradesDisplay = document.getElementById('gradesDisplay');
+            
+            // Función para validar una nota
+            function validarNota(nota) {
+                const valor = parseFloat(nota);
+                return !isNaN(valor) && valor >= 1.0 && valor <= 7.0;
+            }
+            
+            // Función para calcular el promedio
+            function calcularPromedio(notas) {
+                let suma = 0;
+                for (let i = 0; i < notas.length; i++) {
+                    suma += parseFloat(notas[i]);
+                }
+                return suma / notas.length;
+            }
+            
+            // Función para determinar el mensaje según el promedio
+            function obtenerMensaje(promedio) {
+                if (promedio >= 6.0) {
+                    return {
+                        mensaje: `¡Excelente! Tienes promedio ${promedio.toFixed(2)}.`,
+                        tipo: 'excellent',
+                        claseAlerta: 'alert-excellent',
+                        claseCard: 'excellent',
+                        icono: 'bi-emoji-smile'
+                    };
+                } else if (promedio >= 5.0) {
+                    return {
+                        mensaje: `Tienes promedio ${promedio.toFixed(2)}. ¡Sigue adelante, puedes mejorar!`,
+                        tipo: 'good',
+                        claseAlerta: 'alert-good',
+                        claseCard: 'good',
+                        icono: 'bi-emoji-neutral'
+                    };
+                } else if (promedio >= 4.0) {
+                    return {
+                        mensaje: `Tienes promedio ${promedio.toFixed(2)}. Debes esforzarte más.`,
+                        tipo: 'regular',
+                        claseAlerta: 'alert-regular',
+                        claseCard: 'regular',
+                        icono: 'bi-emoji-frown'
+                    };
+                } else {
+                    return {
+                        mensaje: `Has reprobado con promedio ${promedio.toFixed(2)}. Continúa intentándolo.`,
+                        tipo: 'failed',
+                        claseAlerta: 'alert-failed',
+                        claseCard: 'failed',
+                        icono: 'bi-emoji-dizzy'
+                    };
+                }
+            }
+            
+            // Función para mostrar resultados
+            function mostrarResultados(notas) {
+                const promedio = calcularPromedio(notas);
+                const info = obtenerMensaje(promedio);
+                
+                // Actualizar la visualización de notas
+                const gradeElements = gradesDisplay.querySelectorAll('.grade-value');
+                gradeElements.forEach((element, index) => {
+                    if (notas[index]) {
+                        element.textContent = parseFloat(notas[index]).toFixed(1);
+                    }
+                });
+                
+                // Actualizar las tarjetas de notas
+                const gradeCards = gradesDisplay.querySelectorAll('.grade-card');
+                gradeCards.forEach(card => {
+                    card.className = 'grade-card';
+                    card.classList.add(info.claseCard);
+                });
+                
+                // Mostrar el resultado principal
+                resultContainer.innerHTML = `
+                    <div class="text-center">
+                        <i class="bi ${info.icono} display-1 mb-3 text-${info.tipo === 'excellent' ? 'success' : info.tipo === 'failed' ? 'danger' : 'warning'}"></i>
+                        <h3 class="mb-3">Promedio: <span class="grade-value">${promedio.toFixed(2)}</span></h3>
+                        <p class="lead">${info.mensaje}</p>
+                    </div>
+                `;
+                
+                // Mostrar alerta
+                alertContainer.innerHTML = `
+                    <div class="alert-message ${info.claseAlerta}">
+                        <i class="bi ${info.icono} me-2"></i>
+                        ${info.mensaje}
+                    </div>
+                `;
+                
+                // Mostrar en consola
+                console.log('=== SISTEMA DE CALIFICACIONES ===');
+                console.log(`Notas ingresadas: ${notas.join(', ')}`);
+                console.log(`Promedio calculado: ${promedio.toFixed(2)}`);
+                console.log(`Mensaje: ${info.mensaje}`);
+                console.log('=================================');
+            }
+            
+            // Función para solicitar notas con SweetAlert
+            function solicitarNotasSweetAlert() {
+                Swal.fire({
+                    title: 'Ingrese 3 notas',
+                    html: `
+                        <p>Ingresa 3 notas separadas por comas (ej: 5.5, 6.0, 4.5)</p>
+                        <input type="text" id="notasInput" class="swal2-input" placeholder="Ej: 5.5, 6.0, 4.5">
+                        <p class="text-muted mt-2" style="font-size: 0.9rem;">Las notas deben estar entre 1.0 y 7.0</p>
+                    `,
+                    showCancelButton: true,
+                    confirmButtonText: 'Calcular promedio',
+                    cancelButtonText: 'Cancelar',
+                    preConfirm: () => {
+                        const input = Swal.getPopup().querySelector('#notasInput').value;
+                        if (!input) {
+                            Swal.showValidationMessage('Por favor ingresa las notas');
+                            return false;
+                        }
+                        
+                        // Separar las notas por comas
+                        const notasArray = input.split(',').map(nota => nota.trim());
+                        
+                        // Validar que sean exactamente 3 notas
+                        if (notasArray.length !== 3) {
+                            Swal.showValidationMessage('Debes ingresar exactamente 3 notas');
+                            return false;
+                        }
+                        
+                        // Validar cada nota
+                        for (let i = 0; i < notasArray.length; i++) {
+                            if (!validarNota(notasArray[i])) {
+                                Swal.showValidationMessage(`La nota ${i+1} (${notasArray[i]}) no es válida. Debe ser un número entre 1.0 y 7.0`);
+                                return false;
+                            }
+                        }
+                        
+                        return notasArray;
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed && result.value) {
+                        mostrarResultados(result.value);
+                    }
+                });
+            }
+            
+            // Función para solicitar notas con Prompt tradicional
+            function solicitarNotasPrompt() {
+                let input = prompt("Ingrese 3 notas separadas por comas (ej: 5.5, 6.0, 4.5):\nLas notas deben estar entre 1.0 y 7.0");
+                
+                if (input === null) {
+                    return; // Usuario canceló
+                }
+                
+                // Separar las notas por comas
+                const notasArray = input.split(',').map(nota => nota.trim());
+                
+                // Validar que sean exactamente 3 notas
+                if (notasArray.length !== 3) {
+                    alert('Error: Debes ingresar exactamente 3 notas separadas por comas.');
+                    return;
+                }
+                
+                // Validar cada nota
+                for (let i = 0; i < notasArray.length; i++) {
+                    if (!validarNota(notasArray[i])) {
+                        alert(`Error: La nota ${i+1} (${notasArray[i]}) no es válida.\nDebe ser un número entre 1.0 y 7.0.`);
+                        return;
+                    }
+                }
+                
+                mostrarResultados(notasArray);
+            }
+            
+            // Función para usar datos de ejemplo
+            function usarDatosEjemplo() {
+                const ejemplos = [
+                    [6.5, 7.0, 6.8], // Excelente
+                    [5.5, 5.0, 5.3], // Bueno
+                    [4.5, 4.0, 4.2], // Regular
+                    [3.5, 3.0, 2.8]  // Reprobado
+                ];
+                
+                // Seleccionar un ejemplo aleatorio
+                const ejemplo = ejemplos[Math.floor(Math.random() * ejemplos.length)];
+                mostrarResultados(ejemplo);
+                
+                // Mostrar mensaje informativo
+                Swal.fire({
+                    title: 'Datos de ejemplo cargados',
+                    text: `Se usaron las notas: ${ejemplo.join(', ')}`,
+                    icon: 'info',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+            
+            // Event listeners
+            btnSweetAlert.addEventListener('click', solicitarNotasSweetAlert);
+            btnPrompt.addEventListener('click', solicitarNotasPrompt);
+            btnExample.addEventListener('click', usarDatosEjemplo);
+            
+            // Inicializar con un mensaje de bienvenida
+            console.log('Sistema de calificaciones cargado');
+            console.log('Selecciona un método para ingresar las notas');
+        });
+    </script>
+</body>
+</html>

@@ -5,6 +5,8 @@
     --light-color: #f8f9fa;
     --dark-color: #212529;
     --success-color: #4ade80;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
 }
 
 body {
@@ -110,4 +112,105 @@ body {
     font-size: 1.5rem;
     margin-right: 10px;
     color: var(--accent-color);
+}
+
+
+
+
+
+.grade-card {
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.grade-card.excellent {
+    border-color: var(--success-color);
+    background-color: rgba(74, 222, 128, 0.1);
+}
+
+.grade-card.good {
+    border-color: var(--warning-color);
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.grade-card.regular {
+    border-color: #f59e0b;
+    background-color: rgba(245, 158, 11, 0.05);
+}
+
+.grade-card.failed {
+    border-color: var(--danger-color);
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.grade-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.grade-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.instructions {
+    background-color: #e8f4fd;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.instructions-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.instructions-list li {
+    padding: 0.5rem 0;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.instructions-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.alert-message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.alert-excellent {
+    background-color: rgba(74, 222, 128, 0.2);
+    color: #065f46;
+    border-left: 4px solid var(--success-color);
+}
+
+.alert-good {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #92400e;
+    border-left: 4px solid var(--warning-color);
+}
+
+.alert-regular {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: #92400e;
+    border-left: 4px solid #f59e0b;
+}
+
+.alert-failed {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #991b1b;
+    border-left: 4px solid var(--danger-color);
 }
