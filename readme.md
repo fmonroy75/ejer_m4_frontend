@@ -29,6 +29,19 @@ Haz una aplicación que calcule el área de
                     cuadro de alerta, en la consola del
                     navegador e impreso en tu página HTML.
 
+## Ejercicio practico 2, Lecci­on 2
+### Enunciado
+En este Ejercicio Práctico, Si la nota es superior o igual a 6.0, debes retornar
+                            por pantalla: ¡Excelente! Tienes promedio (valor).
+                            Si la nota es igual o superior a 5.0 e inferior a 6.0,
+                            debes retornar por pantalla: Tienes promedio
+                            (valor). ¡Sigue adelante, puedes mejorar!
+                            Si la nota es igual o superior a 4.0 e inferior a 5.0,
+                            debes retornar: Tienes promedio (valor). Debes
+                            esforzarte más.
+                            Por último, si la nota es inferior a 4.0, debe
+                            retornar: Has reprobado con promedio (valor).
+                            Continúa intentándolo.
 
 ## Reto 1
 ### Enunciado
