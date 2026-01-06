@@ -43,6 +43,11 @@ En este Ejercicio Práctico, Si la nota es superior o igual a 6.0, debes retorna
                             retornar: Has reprobado con promedio (valor).
                             Continúa intentándolo.
 
+## Ejercicio practico 1, Lecci­on 3
+### Enunciado
+En este ejercicio deberás realizar una aplicación que permita obtener el promedio del curso a partir de 3 notas ingresadas por alumno. Las ponderaciones de las nota 1, 2 y 3 son, respectivamente, de 25%, 35% y 40%.
+
+
 ## Reto 1
 ### Enunciado
 Sin declarar ninguna variable, realiza un programa que consulte al usuario su nombre, para luego escribirlo al interior de un header <h1> dentro de la página HTML. En un párrafo <p> escribe: “Mucho gusto”. Escribe en la consola: “Acabo de insertar tu nombre en un header”. Genera una ventana de alerta al final del programa que diga: “Programa Terminado”. Realiza esto al interior de un elemento <script> en HTML
