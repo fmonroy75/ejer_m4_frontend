@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Módulo 4 - Front End</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class="header text-center">
+        <h1>Reto 2</h1>
+        
+        <p>Realiza un programa que solicite el valor de la base y la altura de un triángulo, para luego determinar su área (base*altura)/2. Luego debe consultar qué tipo de triángulo es (equilátero, isósceles, escaleno o rectángulo). El tipo de triángulo ingresado en minúscula (no son necesario los tildes) debe ser convertido a mayúscula En tu página HTML escribe, por ejemplo, “El área del triángulo ESCALENO de base 4 y altura 5, es de 10”.</p>
+        
+
+</div>
+</header>
+ </div>
+
+
+
+         <div class="container">
+            <h1>Calculadora de Área de Triángulos</h1>
+            
+            <div class="form-group">
+                <label for="base">Base del triángulo:</label>
+                <input type="number" id="base" step="0.01" min="0.01" placeholder="Ingresa la base">
+            </div>
+            
+            <div class="form-group">
+                <label for="altura">Altura del triángulo:</label>
+                <input type="number" id="altura" step="0.01" min="0.01" placeholder="Ingresa la altura">
+            </div>
+            
+            <div class="form-group">
+                <label for="tipo">Tipo de triángulo:</label>
+                <select id="tipo">
+                    <option value="">Selecciona un tipo</option>
+                    <option value="equilatero">Equilátero</option>
+                    <option value="isosceles">Isósceles</option>
+                    <option value="escaleno">Escaleno</option>
+                    <option value="rectangulo">Rectángulo</option>
+                </select>
+            </div>
+            
+            <button onclick="calcularArea()">Calcular Área</button>
+            
+            <div id="resultado" class="result" style="display: none;"></div>
+        </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <button class="btn btn-outline-primary" id="promptBtn">
+                        <a href="index.html">  <i class="bi bi-chat-dots"></i> Volver a inicio</a>
+                    </button>
+                </div>
+                
+            </div>
+                <!-- Footer -->
+                <footer class="footer">
+                    <p class="mb-2">Curso de Front End - Módulo 4 - Talento Digital</p>
+                    <p class="mb-0">
+                        <small>Desarrollado por Francisco Monroy</small>
+                    </p>
+                </footer>
+
+  <script src="assets/js/reto2.js"> </script>              
+
+</body>
+</html>
