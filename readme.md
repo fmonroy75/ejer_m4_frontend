@@ -56,6 +56,9 @@ En este ejercicio deberás ingresar tres números y el programa determinará cu�
 ### Enunciado
 En este ejercicio practicarás lo aprendido en clases realizando un juego en el que debas adivinar un número del 1 al 10.
 
+## Ejercicio practico 2, Lecci­on 4
+### Enunciado
+En este ejercicio practicarás lo aprendido en clases desarrollando un algoritmo que calcule el valor discriminante recibiendo 3 valores de una ecuación de segundo grado
 
 ## Reto 1
 ### Enunciado
