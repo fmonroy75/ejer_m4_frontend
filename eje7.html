@@ -148,10 +148,6 @@
 
         // revisa lista usados
         function revisarLista(lista, numero) {
-            if (lista.length === 0) {
-                return true;
-            }
-            
             for (let i = 0; i < lista.length; i++) {
                 if (lista[i] === numero) {
                     showMessage("Ya has elegido este número. Por favor, elige otro.", "warning");
@@ -230,7 +226,7 @@
                 // gana
                 gameOver = true;
                 secretNumberDisplay.textContent = secretNumber;
-                secretNumberDisplay.style.background = "linear-gradient(135deg, var(--success-color), #10b981)";
+                //secretNumberDisplay.style.background = "linear-gradient(135deg, var(--success-color), #10b981)";
                 showMessage(`¡Felicidades! Has adivinado el número ${secretNumber} en ${attempts} intento(s).`, "success");
                 displayFinalResult(true);
             } else {
@@ -241,7 +237,7 @@
                 if (attempts >= maxAttempts) {
                     gameOver = true;
                     secretNumberDisplay.textContent = secretNumber;
-                    secretNumberDisplay.style.background = "linear-gradient(135deg, var(--danger-color), #dc2626)";
+                    //secretNumberDisplay.style.background = "linear-gradient(135deg, var(--danger-color), #dc2626)";
                     displayFinalResult(false);
                 }
             }
