@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Número - Juego</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header text-center">
+            <h1><i class="bi bi-controller"></i> Adivina el Número</h1>
+            <p class="lead mt-2">Juego interactivo para adivinar un número del 1 al 10</p>
+        </header>
+
+        <!-- Exercise Card -->
+        <div class="exercise-card">
+
+            <div class="exercise-body">
+                <!-- Instructions -->
+                <div class="instructions">
+                    <h4><i class="bi bi-info-circle"></i> Instrucciones del Juego</h4>
+                    <ul class="instructions-list">
+                        <li>La computadora elegirá un número aleatorio entre 1 y 10.</li>
+                        <li>Tienes <strong>3 oportunidades</strong> para adivinar el número.</li>
+                        <li>Debes ingresar números únicos en cada intento (no puedes repetir números).</li>
+                        <li>Solo se permiten números entre 1 y 10.</li>
+                        <li>¡Ganas si adivinas el número dentro de tus 3 intentos!</li>
+                    </ul>
+                </div>
+
+                <!--  Container -->
+                <div class="game-container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mb-3"><i class="bi bi-gear"></i> Configuración del Juego</h4>
+                            
+                            <div class="mb-4 text-center">
+                                <div class="number-bubble" id="secretNumberDisplay">
+                                    ?
+                                </div>
+                                <p class="text-muted mt-2">Número secreto (se revelará al final)</p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5><i class="bi bi-bullseye"></i> Tus Intentos</h5>
+
+                                <p id="attemptsText" class="text-center">Intentos restantes: <span id="remainingAttempts">3</span></p>
+                            </div>
+
+                            <div class="mb-4">
+                                <h5><i class="bi bi-x-circle"></i> Números Usados</h5>
+                                <div class="d-flex flex-wrap justify-content-center gap-2" id="usedNumbersDisplay">
+                                    <!-- intentos-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h4 class="mb-3"><i class="bi bi-play-circle"></i> Jugar</h4>
+                            
+                            <div class="mb-4">
+                                <label for="userGuess" class="form-label">Ingresa tu número (1-10):</label>
+                                <div class="input-group input-group-custom mb-3">
+                                    <input type="number" class="form-control" id="userGuess" min="1" max="10" placeholder="Ej: 5">
+                                    <button class="btn btn-custom" type="button" id="submitGuess">
+                                        <i class="bi bi-send"></i> Intentar
+                                    </button>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-outline-primary me-2" id="startGame">
+                                        <i class="bi bi-play-fill"></i> Iniciar Juego
+                                    </button>
+                                    <button class="btn btn-outline-secondary" id="resetGame">
+                                        <i class="bi bi-arrow-clockwise"></i> Reiniciar
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- mensajes -->
+                            <div id="gameMessages">
+                                <!-- mensajes -->
+                            </div>
+
+                            <!-- resultados-->
+                            <div class="result-area" id="gameResults" style="display: none;">
+                                <h5><i class="bi bi-trophy"></i> Resultado Final</h5>
+                                <div id="finalResult"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="row mt-4 mb-4">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-outline-primary">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <i class="bi bi-house-door"></i> Volver a inicio
+                    </a>
+                </button>
+            </div>
+        </div>
+        <footer class="footer">
+            <p class="mb-2">Curso de Front End - Módulo 4 - Talento Digital</p>
+            <p class="mb-0">
+                <small>Desarrollado por Francisco Monroy</small>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS Bundle con Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // variables
+        let secretNumber;
+        let attempts = 0;
+        let maxAttempts = 3;
+        let usedNumbers = [];
+        let gameOver = false;
+        let gameStarted = false;
+
+        // DOM 
+        const userGuessInput = document.getElementById('userGuess');
+        const submitGuessBtn = document.getElementById('submitGuess');
+        const startGameBtn = document.getElementById('startGame');
+        const resetGameBtn = document.getElementById('resetGame');
+        const secretNumberDisplay = document.getElementById('secretNumberDisplay');
+        const remainingAttemptsSpan = document.getElementById('remainingAttempts');
+        const usedNumbersDisplay = document.getElementById('usedNumbersDisplay');
+        const gameMessages = document.getElementById('gameMessages');
+        const gameResults = document.getElementById('gameResults');
+        const finalResult = document.getElementById('finalResult');
+        
+
+        // generar random
+        function generarNumeroAleatorio() {
+            return Math.floor(Math.random() * 10) + 1;
+        }
+
+        // revisa lista usados
+        function revisarLista(lista, numero) {
+            if (lista.length === 0) {
+                return true;
+            }
+            
+            for (let i = 0; i < lista.length; i++) {
+                if (lista[i] === numero) {
+                    showMessage("Ya has elegido este número. Por favor, elige otro.", "warning");
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        // Function iniciar juego
+        function startGame() {
+            secretNumber = generarNumeroAleatorio();
+            attempts = 0;
+            usedNumbers = [];
+            gameOver = false;
+            gameStarted = true;
+            
+            // limpiar
+            secretNumberDisplay.textContent = "?";
+            secretNumberDisplay.style.background = "linear-gradient(135deg, var(--primary-color), var(--secondary-color))";
+           
+            updateUsedNumbersDisplay();
+            gameMessages.innerHTML = "";
+            gameResults.style.display = "none";
+            userGuessInput.value = "";
+            userGuessInput.disabled = false;
+            submitGuessBtn.disabled = false;
+            
+            showMessage("¡Juego iniciado! Adivina el número del 1 al 10. Tienes 3 intentos.", "info");
+            
+            // actualiza boton inicio
+            startGameBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Reiniciar Juego';
+            startGameBtn.classList.remove('btn-outline-primary');
+            startGameBtn.classList.add('btn-outline-warning');
+        }
+
+        // funcion del proceso
+        function processGuess() {
+            if (!gameStarted) {
+                showMessage("Primero debes iniciar el juego.", "warning");
+                return;
+            }
+            
+            if (gameOver) {
+                showMessage("El juego ha terminado. Reinicia para jugar de nuevo.", "warning");
+                return;
+            }
+            
+            const userGuess = parseInt(userGuessInput.value);
+            
+            // valida
+            if (isNaN(userGuess)) {
+                showMessage("Por favor, ingresa un número válido.", "warning");
+                return;
+            }
+            
+            if (userGuess < 1 || userGuess > 10) {
+                showMessage("El número debe estar entre 1 y 10.", "warning");
+                return;
+            }
+            
+            // revisa si ya fue usado
+            if (!revisarLista(usedNumbers, userGuess)) {
+                return;
+            }
+            
+            // numeros usados
+            usedNumbers.push(userGuess);
+            
+            // intentos
+            attempts++;
+            
+            // checkea respuesta
+            if (userGuess === secretNumber) {
+                // gana
+                gameOver = true;
+                secretNumberDisplay.textContent = secretNumber;
+                secretNumberDisplay.style.background = "linear-gradient(135deg, var(--success-color), #10b981)";
+                showMessage(`¡Felicidades! Has adivinado el número ${secretNumber} en ${attempts} intento(s).`, "success");
+                displayFinalResult(true);
+            } else {
+                // perdio
+                showMessage(`No es ${userGuess}. Intenta de nuevo.`, "info");
+                
+                // intentos
+                if (attempts >= maxAttempts) {
+                    gameOver = true;
+                    secretNumberDisplay.textContent = secretNumber;
+                    secretNumberDisplay.style.background = "linear-gradient(135deg, var(--danger-color), #dc2626)";
+                    displayFinalResult(false);
+                }
+            }
+            
+            // actualiza mensajes
+            updateUsedNumbersDisplay();
+            userGuessInput.value = "";
+            userGuessInput.focus();
+        }
+
+
+
+        // actualiza numeros usados
+        function updateUsedNumbersDisplay() {
+            usedNumbersDisplay.innerHTML = "";
+            
+            if (usedNumbers.length === 0) {
+                const emptyMsg = document.createElement("p");
+                emptyMsg.className = "text-muted fst-italic";
+                emptyMsg.textContent = "Aún no has usado ningún número";
+                usedNumbersDisplay.appendChild(emptyMsg);
+                return;
+            }
+            
+            usedNumbers.forEach(num => {
+                const numBubble = document.createElement("div");
+                numBubble.className = "attempt-bubble used-number";
+                numBubble.textContent = num;
+                usedNumbersDisplay.appendChild(numBubble);
+            });
+        }
+
+        // muestra mensajes
+        function showMessage(message, type) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `alert-message alert-${type}`;
+            const iconClass = type === 'success' ? 'bi-check-circle' : type === 'warning' ? 'bi-exclamation-triangle' : type === 'danger' ? 'bi-x-circle' : 'bi-info-circle';
+            messageDiv.innerHTML = `<i class="bi ${iconClass} me-2"></i> ${message}`;
+            
+            gameMessages.prepend(messageDiv);
+            
+
+        }
+
+        // resultado final
+        function displayFinalResult(winner) {
+            gameResults.style.display = "block";
+   
+            
+            if (winner) {
+                finalResult.innerHTML = `
+                    <div class="alert alert-success">
+                        <h4><i class="bi bi-trophy"></i> ¡Ganaste!</h4>
+                        <p>Adivinaste el número ${secretNumber} en ${attempts} intento(s).</p>
+                    </div>
+                `;
+            } else {
+                finalResult.innerHTML = `
+                    <div class="alert alert-danger">
+                        <h4><i class="bi bi-x-circle"></i> ¡Perdiste!</h4>
+                        <p>No lograste adivinar el número ${secretNumber} en ${maxAttempts} intentos.</p>
+                    </div>
+                `;
+            }
+            
+            // deshabilita botones
+            userGuessInput.disabled = true;
+            submitGuessBtn.disabled = true;
+        }
+
+        //  listeners
+        startGameBtn.addEventListener('click', startGame);
+        
+        resetGameBtn.addEventListener('click', function() {
+            startGame();
+            showMessage("Juego reiniciado. ¡Buena suerte!", "info");
+        });
+        
+        submitGuessBtn.addEventListener('click', processGuess);
+        
+        userGuessInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                processGuess();
+            }
+        });
+    </script>
+</body>
+</html>

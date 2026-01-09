@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Análisis de Cadena de Nombres</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="assets/css/estilos.css">
+
+</head>
+<body>
+    <div class="container">
+        <header class="header text-center">
+            <h1><i class="bi bi-textarea-t"></i> Análisis de Cadena de Nombres</h1>
+            <p class="lead mt-2">Ejercicio: Estructuras de tipo arreglo y sentencias iterativas</p>
+        </header>
+
+        <div class="instructions">
+            <h3><i class="bi bi-info-circle"></i> Instrucciones del ejercicio:</h3>
+            <p>En este ejercicio deberás ingresar tres nombres separados por comas. El programa analizará la cadena como si fuera un array, mostrando la posición de cada carácter y especialmente dónde se encuentran las comas.</p>
+            <ul class="instructions-list">
+                <li><strong>Formato de entrada:</strong> Tres nombres separados por comas (ej: María,Pedro,Rodrigo)</li>
+                <li><strong>Análisis de posición:</strong> Se mostrará la posición de cada letra (comenzando desde 0)</li>
+                <li><strong>Detección de comas:</strong> Se identificará la posición exacta de cada coma en la cadena</li>
+                <li><strong>Segmentación:</strong> Se separarán y mostrarán los nombres individualmente</li>
+            </ul>
+
+        </div>
+
+        <div class="exercise-card">
+            <div class="exercise-header d-flex align-items-center">
+                <i class="bi bi-text-paragraph exercise-icon"></i>
+                <div>
+                    <h3 class="h5 mb-0">Análisis de Posiciones en Cadena de Texto</h3>
+                    <small class="text-light">Ingresa tres nombres separados por comas y observa el análisis de posiciones</small>
+                </div>
+            </div>
+            <div class="exercise-body text-center">
+                <button class="btn btn-custom" id="btnIniciar">
+                    <i class="bi bi-play-circle"></i> Iniciar Análisis
+                </button>
+                
+                <div class="result-area mt-4" id="resultArea" style="display: none;">
+                    <h5><i class="bi bi-search"></i> Análisis Detallado:</h5>
+                    
+                    <div class="mt-3 mb-3">
+                        <h6>Cadena Ingresada:</h6>
+                        <div class="string-display" id="cadenaIngresada">
+                            Esperando entrada...
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 mb-4">
+                        <h6>Visualización de Posiciones:</h6>
+                        <div id="visualizacionPosiciones" class="mb-3">
+                            <!-- Aquí se generará la visualización de posiciones -->
+                        </div>
+                        <div class="d-flex justify-content-center flex-wrap" id="leyendaPosiciones">
+                            <!-- Leyenda se generará aquí -->
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-12 mb-4">
+                            <div class="analysis-table">
+                                <div class="table-header d-flex">
+                                    <div class="col-2 text-center">Posición</div>
+                                    <div class="col-3 text-center">Carácter</div>
+                                    <div class="col-7">Tipo</div>
+                                </div>
+                                <div id="tablaAnalisis">
+                                    <!-- La tabla se generará dinámicamente -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 bg-light rounded">
+                                <h6><i class="bi bi-comma"></i> Posiciones de Comas</h6>
+                                <div id="posicionesComas" class="mt-2">
+                                    <!-- Posiciones de comas se mostrarán aquí -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-3 bg-light rounded">
+                                <h6><i class="bi bi-card-text"></i> Nombres Identificados</h6>
+                                <div id="nombresIdentificados" class="mt-2">
+                                    <!-- Nombres identificados se mostrarán aquí -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="mensajeFinal" class="message-display mt-3">
+                        <!-- Mensajes finales aparecerán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4 mb-4">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-outline-primary">
+                    <a href="index.html" style="text-decoration: none; color: inherit;">
+                        <i class="bi bi-house-door"></i> Volver a inicio
+                    </a>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="mb-2">Curso de Front End - Módulo 4 - Talento Digital</p>
+            <p class="mb-0">
+                <small>Ejercicio: Análisis de cadenas como estructuras de arreglo</small>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnIniciar = document.getElementById('btnIniciar');
+            const resultArea = document.getElementById('resultArea');
+            const cadenaIngresada = document.getElementById('cadenaIngresada');
+            const visualizacionPosiciones = document.getElementById('visualizacionPosiciones');
+            const leyendaPosiciones = document.getElementById('leyendaPosiciones');
+            const tablaAnalisis = document.getElementById('tablaAnalisis');
+            const posicionesComas = document.getElementById('posicionesComas');
+            const nombresIdentificados = document.getElementById('nombresIdentificados');
+            const mensajeFinal = document.getElementById('mensajeFinal');
+            
+            btnIniciar.addEventListener('click', iniciarEjercicio);
+            
+            function iniciarEjercicio() {
+                // Mostrar área de resultados
+                resultArea.style.display = 'block';
+                
+                // Resetear contenido
+                visualizacionPosiciones.innerHTML = '';
+                tablaAnalisis.innerHTML = '';
+                posicionesComas.innerHTML = '';
+                nombresIdentificados.innerHTML = '';
+                mensajeFinal.innerHTML = '';
+                
+                // Solicitar entrada al usuario
+                Swal.fire({
+                    title: 'Ingresa tres nombres',
+                    text: 'Formato: nombre1,nombre2,nombre3',
+                    input: 'text',
+                    inputPlaceholder: 'Ej: María,Pedro,Rodrigo',
+                    showCancelButton: true,
+                    confirmButtonText: 'Analizar',
+                    cancelButtonText: 'Cancelar',
+                    inputValidator: (value) => {
+                        if (!value) {
+                            return 'Debes ingresar algún texto';
+                        }
+                        if (!value.includes(',')) {
+                            return 'Debes separar los nombres con comas';
+                        }
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const cadena = result.value.trim();
+                        analizarCadena(cadena);
+                    }
+                });
+            }
+            
+            function analizarCadena(cadena) {
+                // Mostrar cadena ingresada
+                cadenaIngresada.textContent = `"${cadena}"`;
+                
+                // Crear arrays para análisis
+                const caracteres = cadena.split('');
+                const posicionesComasArray = [];
+                
+                // Generar visualización de posiciones
+                //generarVisualizacionPosiciones(caracteres);
+                
+                // Generar leyenda
+                //generarLeyenda();
+                
+                // Generar tabla de análisis
+                generarTablaAnalisis(caracteres, posicionesComasArray);
+                
+                // Identificar nombres
+                const nombres = cadena.split(',');
+                mostrarNombresIdentificados(nombres);
+                
+                // Mostrar mensaje final
+                mostrarMensajeFinal(cadena, nombres, posicionesComasArray);
+            }
+            
+            function generarVisualizacionPosiciones(caracteres) {
+                visualizacionPosiciones.innerHTML = '';
+                
+                // Crear fila de caracteres
+                const filaCaracteres = document.createElement('div');
+                filaCaracteres.className = 'd-flex justify-content-center flex-wrap mb-2';
+                
+                // Crear fila de índices
+                const filaIndices = document.createElement('div');
+                filaIndices.className = 'd-flex justify-content-center flex-wrap';
+                
+                caracteres.forEach((caracter, index) => {
+                    // Div para el carácter
+                    const charDiv = document.createElement('div');
+                    charDiv.className = 'position-display ';
+                    
+                    if (caracter === ',') {
+                        charDiv.className += 'position-comma';
+                        charDiv.textContent = ',';
+                    } else if (caracter === ' ') {
+                        charDiv.className += 'position-empty';
+                        charDiv.innerHTML = '&nbsp;';
+                    } else {
+                        charDiv.className += 'position-letter';
+                        charDiv.textContent = caracter;
+                    }
+                    
+                    // Div para el índice
+                    const indexDiv = document.createElement('div');
+                    indexDiv.className = 'position-index';
+                    indexDiv.textContent = index;
+                    indexDiv.style.width = '30px';
+                    indexDiv.style.margin = '2px';
+                    
+                    filaCaracteres.appendChild(charDiv);
+                    filaIndices.appendChild(indexDiv);
+                });
+                
+                visualizacionPosiciones.appendChild(filaCaracteres);
+                visualizacionPosiciones.appendChild(filaIndices);
+            }
+            
+            function generarLeyenda() {
+                leyendaPosiciones.innerHTML = `
+                    <div class="d-flex align-items-center me-3">
+                        <div class="position-display position-letter me-2"></div>
+                        <small>Letra</small>
+                    </div>
+                    <div class="d-flex align-items-center me-3">
+                        <div class="position-display position-comma me-2">,</div>
+                        <small>Coma</small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="position-display position-empty me-2"></div>
+                        <small>Espacio</small>
+                    </div>
+                `;
+            }
+            
+            function generarTablaAnalisis(caracteres, posicionesComasArray) {
+                tablaAnalisis.innerHTML = '';
+                
+                caracteres.forEach((caracter, index) => {
+                    const row = document.createElement('div');
+                    row.className = 'table-row d-flex';
+                    
+                    // Detectar tipo de carácter
+                    let tipo = '';
+                    let tipoClase = '';
+                    
+                    if (caracter === ',') {
+                        tipo = '<span class="comma-highlight">COMA (separador)</span>';
+                        tipoClase = 'comma';
+                        posicionesComasArray.push(index);
+                    } else if (caracter === ' ') {
+                        tipo = 'Espacio en blanco';
+                        tipoClase = 'space';
+                    } else if (/[a-zA-ZáéíóúÁÉÍÓÚñÑ]/.test(caracter)) {
+                        tipo = `<span class="letter-highlight">Letra (${caracter.toUpperCase()})</span>`;
+                        tipoClase = 'letter';
+                    } else {
+                        tipo = 'Otro carácter';
+                        tipoClase = 'other';
+                    }
+                    
+                    // Resaltar la posición si es una coma
+                    const posClass = tipoClase === 'comma' ? 'fw-bold text-danger' : '';
+                    
+                    row.innerHTML = `
+                        <div class="col-2 text-center ${posClass}">${index}</div>
+                        <div class="col-3 text-center">
+                            ${caracter === ' ' ? '&nbsp;' : caracter}
+                        </div>
+                        <div class="col-7">${tipo}</div>
+                    `;
+                    
+                    tablaAnalisis.appendChild(row);
+                });
+                
+                // Mostrar posiciones de comas
+                mostrarPosicionesComas(posicionesComasArray);
+            }
+            
+            function mostrarPosicionesComas(posicionesArray) {
+                posicionesComas.innerHTML = '';
+                
+                if (posicionesArray.length === 0) {
+                    posicionesComas.innerHTML = '<div class="alert alert-warning">No se encontraron comas en la cadena</div>';
+                    return;
+                }
+                
+                posicionesArray.forEach((pos, index) => {
+                    const commaDiv = document.createElement('div');
+                    commaDiv.className = 'd-flex justify-content-between align-items-center mb-2 p-2 bg-white rounded';
+                    commaDiv.innerHTML = `
+                        <span>Coma ${index + 1}:</span>
+                        <span class="badge bg-danger">Posición ${pos}</span>
+                    `;
+                    posicionesComas.appendChild(commaDiv);
+                });
+                
+                // Agregar resumen
+                const resumenDiv = document.createElement('div');
+                resumenDiv.className = 'mt-3 p-2 bg-info text-white rounded';
+                resumenDiv.innerHTML = `
+                    <strong>Total:</strong> ${posicionesArray.length} coma(s) encontrada(s)
+                `;
+                posicionesComas.appendChild(resumenDiv);
+            }
+            
+            function mostrarNombresIdentificados(nombres) {
+                nombresIdentificados.innerHTML = '';
+                
+                if (nombres.length === 0) {
+                    nombresIdentificados.innerHTML = '<div class="alert alert-warning">No se pudieron identificar nombres</div>';
+                    return;
+                }
+                
+                nombres.forEach((nombre, index) => {
+                    const nombreDiv = document.createElement('div');
+                    nombreDiv.className = 'name-segment';
+                    nombreDiv.innerHTML = `
+                        <div class="segment-title">Nombre ${index + 1}</div>
+                        <div class="h6 mb-0">${nombre.trim()}</div>
+                        <small class="text-muted">Longitud: ${nombre.trim().length} caracteres</small>
+                    `;
+                    nombresIdentificados.appendChild(nombreDiv);
+                });
+                
+                // Agregar resumen
+                const resumenDiv = document.createElement('div');
+                resumenDiv.className = 'mt-3 p-2 bg-success text-white rounded';
+                resumenDiv.innerHTML = `
+                    <strong>Resumen:</strong> ${nombres.length} nombre(s) identificado(s)
+                `;
+                nombresIdentificados.appendChild(resumenDiv);
+            }
+            
+            function mostrarMensajeFinal(cadena, nombres, posicionesComasArray) {
+                mensajeFinal.innerHTML = `
+                    <div class="alert alert-success" role="alert">
+                        <h5 class="alert-heading"><i class="bi bi-check-circle"></i> Análisis Completado</h5>
+                        <p>Se analizó la cadena: <strong>"${cadena}"</strong></p>
+                        <hr>
+                        <p class="mb-0">
+                            <strong>Resultados:</strong><br>
+                            • Longitud total: ${cadena.length} caracteres<br>
+                            • Comas encontradas: ${posicionesComasArray.length} (posiciones: ${posicionesComasArray.join(', ')}<br>
+                            • Nombres identificados: ${nombres.length}<br>
+                            • La cadena se comporta como un array de ${cadena.length} elementos indexados de 0 a ${cadena.length - 1}
+                        </p>
+                    </div>
+                `;
+                
+                
+            }
+        });
+    </script>
+</body>
+</html>

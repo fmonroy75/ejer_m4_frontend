@@ -47,6 +47,15 @@ En este Ejercicio Práctico, Si la nota es superior o igual a 6.0, debes retorna
 ### Enunciado
 En este ejercicio deberás realizar una aplicación que permita obtener el promedio del curso a partir de 3 notas ingresadas por alumno. Las ponderaciones de las nota 1, 2 y 3 son, respectivamente, de 25%, 35% y 40%.
 
+## Ejercicio practico 2, Lecci­on 3
+### Enunciado
+En este ejercicio deberás ingresar tres números y el programa determinará cuál es el mayor y cuál es el menor utilizando el algoritmo de Ordenamiento Burbuja. Si los tres números son iguales, se mostrará un mensaje especial.
+
+
+## Ejercicio practico 1, Lecci­on 4
+### Enunciado
+En este ejercicio practicarás lo aprendido en clases realizando un juego en el que debas adivinar un número del 1 al 10.
+
 
 ## Reto 1
 ### Enunciado
@@ -55,5 +64,9 @@ Sin declarar ninguna variable, realiza un programa que consulte al usuario su no
 ## Reto 2
 ### Enunciado
 Realiza un programa que solicite el valor de la base y la altura de un triángulo, para luego determinar su área (base*altura)/2. Luego debe consultar qué tipo de triángulo es (equilátero, isósceles, escaleno o rectángulo). El tipo de triángulo ingresado en minúscula (no son necesario los tildes) debe ser convertido a mayúscula En tu página HTML escribe, por ejemplo, “El área del triángulo ESCALENO de base 4 y altura 5, es de 10”.
+
+## Reto 3
+### Enunciado
+Crea un programa que solicite ingresar tres nombres unidos por una coma. Por ejemplo: María,Pedro,Rodrigo . Como resultado, debes mostrar en la página la ubicación de cada letra en el string como si se tratara de un array (partiendo desde 0). Por último, indica en qué posición de la cadena se ubican las comas.
 
 ## Autor: Francisco Monroy
