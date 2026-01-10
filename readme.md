@@ -60,6 +60,11 @@ En este ejercicio practicarás lo aprendido en clases realizando un juego en el 
 ### Enunciado
 En este ejercicio practicarás lo aprendido en clases desarrollando un algoritmo que calcule el valor discriminante recibiendo 3 valores de una ecuación de segundo grado
 
+## Ejercicio practico 1, Lecci­on 5
+### Enunciado
+En este ejercicio practicarás lo aprendido en clases realizando un programa que contará vocales. Debes abrir el documento adjunto y seguir paso a paso las indicaciones para luego entregar tu trabajo.
+
+
 ## Reto 1
 ### Enunciado
 Sin declarar ninguna variable, realiza un programa que consulte al usuario su nombre, para luego escribirlo al interior de un header <h1> dentro de la página HTML. En un párrafo <p> escribe: “Mucho gusto”. Escribe en la consola: “Acabo de insertar tu nombre en un header”. Genera una ventana de alerta al final del programa que diga: “Programa Terminado”. Realiza esto al interior de un elemento <script> en HTML
