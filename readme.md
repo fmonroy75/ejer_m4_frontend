@@ -64,6 +64,9 @@ En este ejercicio practicarás lo aprendido en clases desarrollando un algoritmo
 ### Enunciado
 En este ejercicio practicarás lo aprendido en clases realizando un programa que contará vocales. Debes abrir el documento adjunto y seguir paso a paso las indicaciones para luego entregar tu trabajo.
 
+## Ejercicio practico 2, Lecci­on 5
+### Enunciado
+En este ejercicio practicarás lo aprendido en clases implementando un programa que permita mantener la información de cada usuario-paciente ordenada (a cada persona  se le pregunta su nombre, edad, peso, y sexo).
 
 ## Reto 1
 ### Enunciado
