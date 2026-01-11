@@ -80,4 +80,13 @@ Realiza un programa que solicite el valor de la base y la altura de un triángul
 ### Enunciado
 Crea un programa que solicite ingresar tres nombres unidos por una coma. Por ejemplo: María,Pedro,Rodrigo . Como resultado, debes mostrar en la página la ubicación de cada letra en el string como si se tratara de un array (partiendo desde 0). Por último, indica en qué posición de la cadena se ubican las comas.
 
+## Reto 4
+### Enunciado
+Crea dos matrices (matriz sueldo bruto y líquido) con cantidad de filas igual al número de empleados de una empresa y dos columnas. La primera columna debe contener, para ambas matrices, el nombre del empleado. La segunda columna debe contener, para una matriz, el sueldo bruto y, para la otra matriz, el líquido (aplicando descuento de 10% previsión y 7% salud).
+
+## Reto 5
+### Enunciado
+Crea un diccionario que contenga por clave el nombre de un usuario, su ID, año de nacimiento y contraseña que será igual al valor hexadecimal del año de nacimiento más un número random entre 1 y 100. Almacena al total de usuarios en una lista de diccionarios. Para esto, deberás consultar inicialmente la cantidad de usuarios.
+
+
 ## Autor: Francisco Monroy
